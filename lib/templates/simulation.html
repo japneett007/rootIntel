@@ -1,0 +1,161 @@
+{% extends "base.html" %}
+
+{% block title %}Plant Simulation - RootIntel{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-header">
+        <h1 class="page-title">🌞 Plant Simulation Lab</h1>
+        <div class="character-guide">
+            <span class="character">👵</span>
+            <div class="speech-bubble">
+                <p>Experiment with different growing conditions and watch how your plant responds in real-time!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="simulation-container">
+        <!-- Plant Type Selection -->
+        <div class="plant-type-section">
+            <h2 class="section-title">🌿 Choose Plant Type</h2>
+            <div class="plant-type-grid">
+                <button class="plant-type-btn active" data-type="tropical">
+                    <span class="plant-icon">🌴</span>
+                    <span class="plant-name">Tropical</span>
+                </button>
+                <button class="plant-type-btn" data-type="desert">
+                    <span class="plant-icon">🌵</span>
+                    <span class="plant-name">Desert</span>
+                </button>
+                <button class="plant-type-btn" data-type="temperate">
+                    <span class="plant-icon">🌳</span>
+                    <span class="plant-name">Temperate</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Environmental Controls -->
+        <div class="controls-section">
+            <h2 class="section-title">🎛️ Environmental Controls</h2>
+            
+            <div class="control-group">
+                <label class="control-label">
+                    <span class="control-icon">☀️</span>
+                    Sunlight: <span id="sunlight-value">50</span>%
+                </label>
+                <input type="range" id="sunlight-slider" class="slider" min="0" max="100" value="50">
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">
+                    <span class="control-icon">💧</span>
+                    Water: <span id="water-value">50</span>%
+                </label>
+                <input type="range" id="water-slider" class="slider" min="0" max="100" value="50">
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">
+                    <span class="control-icon">🌡️</span>
+                    Temperature: <span id="temperature-value">20</span>°C
+                </label>
+                <input type="range" id="temperature-slider" class="slider" min="0" max="40" value="20">
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">
+                    <span class="control-icon">🌱</span>
+                    Fertilizer: <span id="fertilizer-value">50</span>%
+                </label>
+                <input type="range" id="fertilizer-slider" class="slider" min="0" max="100" value="50">
+            </div>
+        </div>
+
+        <!-- Plant Visualization -->
+        <div class="plant-visual-section">
+            <h2 class="section-title">🌿 Plant Health Visualization</h2>
+            <div class="plant-visual">
+                <div id="plant-display" class="plant-display">
+                    <div class="plant-container">
+                        <div id="plant-emoji" class="plant-emoji">🌱</div>
+                        <div id="plant-status" class="plant-status">Healthy</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Health Metrics -->
+        <div class="metrics-section">
+            <h2 class="section-title">📊 Health Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-icon">📈</div>
+                    <div class="metric-content">
+                        <div class="metric-label">Growth Rate</div>
+                        <div class="metric-value" id="growth-metric">75%</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" id="growth-bar" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">🍃</div>
+                    <div class="metric-content">
+                        <div class="metric-label">Chlorophyll</div>
+                        <div class="metric-value" id="chlorophyll-metric">80%</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" id="chlorophyll-bar" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-icon">🌿</div>
+                    <div class="metric-content">
+                        <div class="metric-label">Root Health</div>
+                        <div class="metric-value" id="root-metric">70%</div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" id="root-bar" style="width: 70%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- AI Recommendations -->
+        <div class="recommendations-section">
+            <h2 class="section-title">🤖 AI Recommendations</h2>
+            <div id="recommendations-list" class="recommendations-list">
+                <div class="recommendation-item">
+                    <span class="recommendation-icon">💡</span>
+                    <span class="recommendation-text">Adjust settings to see personalized recommendations</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Preset Scenarios -->
+        <div class="scenarios-section">
+            <h2 class="section-title">🎯 Quick Scenarios</h2>
+            <div class="scenario-buttons">
+                <button class="scenario-btn" data-scenario="desert">
+                    <span class="scenario-icon">🏜️</span>
+                    Desert Conditions
+                </button>
+                <button class="scenario-btn" data-scenario="rainforest">
+                    <span class="scenario-icon">🌧️</span>
+                    Rainforest
+                </button>
+                <button class="scenario-btn" data-scenario="optimal">
+                    <span class="scenario-icon">✨</span>
+                    Optimal Growth
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+{% endblock %}

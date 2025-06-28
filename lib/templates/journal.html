@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}Plant Journal - RootIntel{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-header">
+        <h1 class="page-title">📚 My RootJournal</h1>
+        <div class="character-guide">
+            <span class="character">👵</span>
+            <div class="speech-bubble">
+                <p>Document your plant experiments using the scientific method. Each entry helps you learn and grow!</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add New Entry Button -->
+    <button id="add-entry-btn" class="btn btn-primary btn-large">
+        <span class="btn-icon">➕</span>
+        Add New Entry
+    </button>
+
+    <!-- Journal Entries -->
+    <div class="journal-entries">
+        {% if entries %}
+            {% for entry in entries %}
+            <div class="journal-entry">
+                <div class="entry-header">
+                    <div class="entry-date">{{ entry.timestamp }}</div>
+                    <div class="entry-tags">
+                        {% for tag in entry.tags %}
+                        <span class="tag">{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="entry-content">
+                    <div class="entry-section">
+                        <h4 class="section-title">🤔 Hypothesis</h4>
+                        <p>{{ entry.hypothesis }}</p>
+                    </div>
+                    
+                    <div class="entry-section">
+                        <h4 class="section-title">⚡ Action Taken</h4>
+                        <p>{{ entry.action }}</p>
+                    </div>
+                    
+                    <div class="entry-section">
+                        <h4 class="section-title">📊 Result Observed</h4>
+                        <p>{{ entry.result }}</p>
+                    </div>
+                    
+                    <div class="entry-section">
+                        <h4 class="section-title">💭 Reflection</h4>
+                        <p>{{ entry.reflection }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">📝</div>
+                <h3>No journal entries yet</h3>
+                <p>Start documenting your plant experiments to track your learning journey!</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Add Entry Modal -->
+    <div id="entry-modal" class="modal hidden">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h2>📝 New Journal Entry</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="journal-form">
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="label-icon">🤔</span>
+                            Hypothesis
+                        </label>
+                        <textarea id="hypothesis" class="form-textarea" 
+                                  placeholder="What do you think will happen? What's your prediction?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="label-icon">⚡</span>
+                            Action Taken
+                        </label>
+                        <textarea id="action" class="form-textarea" 
+                                  placeholder="What did you do? Describe your experiment or intervention."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="label-icon">📊</span>
+                            Result Observed
+                        </label>
+                        <textarea id="result" class="form-textarea" 
+                                  placeholder="What happened? Describe the outcome you observed."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="label-icon">💭</span>
+                            Reflection
+                        </label>
+                        <textarea id="reflection" class="form-textarea" 
+                                  placeholder="What did you learn? How will this change your approach?"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            <span class="label-icon">🏷️</span>
+                            Tags (comma-separated)
+                        </label>
+                        <input type="text" id="tags" class="form-input" 
+                               placeholder="e.g., watering, sunlight, fertilizer">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save Entry</button>
+                        <button type="button" class="btn btn-secondary modal-close">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/journal.js') }}"></script>
+{% endblock %}

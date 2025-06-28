@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Plant Diagnosis - RootIntel{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-header">
+        <h1 class="page-title">🔍 Plant Diagnosis</h1>
+        <div class="character-guide">
+            <span class="character">👴</span>
+            <div class="speech-bubble">
+                <p>Upload a photo or tell me about your plant's symptoms, and I'll help you diagnose the issue!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="diagnosis-container">
+        <!-- Photo Upload Section -->
+        <div class="upload-section">
+            <h2 class="section-title">📸 Enchanted Photo Frame</h2>
+            <div class="upload-area" id="upload-area">
+                <div class="upload-content">
+                    <div class="upload-icon">🖼️</div>
+                    <p class="upload-text">Drop your plant photo here or click to browse</p>
+                    <input type="file" id="image-input" accept="image/*" hidden>
+                </div>
+                <div id="image-preview" class="image-preview hidden">
+                    <img id="preview-img" src="/placeholder.svg" alt="Plant preview">
+                    <button id="remove-image" class="remove-btn">✕</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Voice Input Section -->
+        <div class="voice-section">
+            <h2 class="section-title">🎤 Listening Flower</h2>
+            <div class="voice-container">
+                <button id="voice-button" class="voice-button">
+                    <span class="voice-icon">🌸</span>
+                    <span class="voice-text">Start Voice Input</span>
+                </button>
+                <div id="voice-status" class="voice-status hidden">
+                    <div class="listening-animation">
+                        <div class="pulse"></div>
+                        <div class="pulse"></div>
+                        <div class="pulse"></div>
+                    </div>
+                    <p>Listening... Speak now!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Symptoms Input -->
+        <div class="symptoms-section">
+            <h2 class="section-title">📝 Describe Symptoms</h2>
+            <textarea id="symptoms-input" class="symptoms-textarea" 
+                      placeholder="Describe what you notice about your plant... (e.g., yellowing leaves, brown spots, wilting)"></textarea>
+        </div>
+
+        <!-- Analyze Button -->
+        <button id="analyze-button" class="btn btn-primary btn-large">
+            <span class="btn-icon">🔍</span>
+            Analyze Plant
+        </button>
+
+        <!-- Results Section -->
+        <div id="results-section" class="results-section hidden">
+            <h2 class="section-title">📋 Diagnosis Results</h2>
+            <div id="diagnosis-card" class="diagnosis-card">
+                <!-- Results will be populated here -->
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="loading-state hidden">
+            <div class="loading-spinner"></div>
+            <p>Analyzing your plant... 🌱</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/diagnosis.js') }}"></script>
+{% endblock %}

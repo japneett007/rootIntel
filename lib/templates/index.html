@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+
+{% block title %}Home - RootIntel{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <!-- Welcome Section -->
+    <div class="welcome-section">
+        <div class="welcome-content">
+            <h1 class="welcome-title">Welcome to RootIntel 🌱</h1>
+            <p class="welcome-subtitle">Your AI-powered plant care companion</p>
+            
+            <div class="character-guides">
+                <div class="character-guide">
+                    <span class="character">👴</span>
+                    <div class="speech-bubble">
+                        <p>Hello there! I'm Paa, your gardening mentor. Let me help you diagnose and care for your plants!</p>
+                    </div>
+                </div>
+                
+                <div class="character-guide">
+                    <span class="character">👵</span>
+                    <div class="speech-bubble">
+                        <p>And I'm here to guide you through plant simulations and experiments. Together, we'll make you a master gardener!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="stats-section">
+        <h2 class="section-title">📊 Your Progress</h2>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">🔍</div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ user_data.diagnoses_count }}</div>
+                    <div class="stat-label">Plants Diagnosed</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🎮</div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ user_data.quests_completed }}</div>
+                    <div class="stat-label">Quests Completed</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">🌱</div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ user_data.plants_saved }}</div>
+                    <div class="stat-label">Plants Saved</div>
+                </div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-content">
+                    <div class="stat-number">{{ user_data.journal_entries_count }}</div>
+                    <div class="stat-label">Journal Entries</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Level Progress -->
+    <div class="level-section">
+        <h2 class="section-title">🏆 Level Progress</h2>
+        <div class="level-card">
+            <div class="level-info">
+                <div class="level-badge">Level {{ user_data.level }}</div>
+                <div class="xp-info">{{ user_data.xp }} / {{ user_data.level * 100 }} XP</div>
+            </div>
+            <div class="level-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: {{ (user_data.xp / (user_data.level * 100)) * 100 }}%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Badges -->
+    {% if user_data.badges %}
+    <div class="badges-section">
+        <h2 class="section-title">🏅 Your Badges</h2>
+        <div class="badges-grid">
+            {% for badge in user_data.badges %}
+            <div class="badge-item">
+                <span class="badge-text">{{ badge }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Recent Activity -->
+    <div class="activity-section">
+        <h2 class="section-title">📈 Recent Activity</h2>
+        {% if recent_activity %}
+        <div class="activity-list">
+            {% for activity in recent_activity %}
+            <div class="activity-item">
+                <div class="activity-icon {{ activity.status }}">
+                    {% if activity.type == 'diagnosis' %}🔍
+                    {% elif activity.type == 'journal' %}📝
+                    {% elif activity.type == 'quest' %}🎮
+                    {% else %}✨{% endif %}
+                </div>
+                <div class="activity-content">
+                    <div class="activity-text">{{ activity.text }}</div>
+                    <div class="activity-time">{{ activity.timestamp[:19] }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">🌱</div>
+            <h3>Start Your Plant Journey!</h3>
+            <p>Begin by diagnosing your first plant or exploring the simulation lab.</p>
+            <div class="empty-actions">
+                <a href="{{ url_for('diagnosis') }}" class="btn btn-primary">Diagnose Plant</a>
+                <a href="{{ url_for('simulation') }}" class="btn btn-secondary">Try Simulation</a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <h2 class="section-title">🚀 Quick Actions</h2>
+        <div class="actions-grid">
+            <a href="{{ url_for('diagnosis') }}" class="action-card">
+                <div class="action-icon">📸</div>
+                <div class="action-content">
+                    <h3>Diagnose Plant</h3>
+                    <p>Upload a photo or describe symptoms</p>
+                </div>
+            </a>
+            
+            <a href="{{ url_for('simulation') }}" class="action-card">
+                <div class="action-icon">🧪</div>
+                <div class="action-content">
+                    <h3>Run Simulation</h3>
+                    <p>Experiment with growing conditions</p>
+                </div>
+            </a>
+            
+            <a href="{{ url_for('journal') }}" class="action-card">
+                <div class="action-icon">📝</div>
+                <div class="action-content">
+                    <h3>Add Journal Entry</h3>
+                    <p>Document your plant experiments</p>
+                </div>
+            </a>
+            
+            <a href="{{ url_for('quests') }}" class="action-card">
+                <div class="action-icon">🎯</div>
+                <div class="action-content">
+                    <h3>Start Quest</h3>
+                    <p>Learn through guided challenges</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// Auto-refresh stats every 30 seconds
+setInterval(function() {
+    fetch('/api/get-user-data')
+        .then(response => response.json())
+        .then(data => {
+            // Update stats if they've changed
+            const statsElements = document.querySelectorAll('.stat-number');
+            if (statsElements.length >= 4) {
+                statsElements[0].textContent = data.diagnoses_count || 0;
+                statsElements[1].textContent = data.quests_completed || 0;
+                statsElements[2].textContent = data.plants_saved || 0;
+                statsElements[3].textContent = data.journal_entries_count || 0;
+            }
+        })
+        .catch(error => console.log('Stats update failed:', error));
+}, 30000);
+</script>
+{% endblock %}

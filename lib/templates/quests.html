@@ -1,0 +1,188 @@
+{% extends "base.html" %}
+
+{% block title %}Learning Quests - RootIntel{% endblock %}
+
+{% block content %}
+<div class="page-container">
+    <div class="page-header">
+        <h1 class="page-title">🎮 Learning Quests</h1>
+        <div class="character-guide">
+            <span class="character">👴</span>
+            <div class="speech-bubble">
+                <p>Complete these quests to become a master gardener! Each quest teaches you something new about plant care.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Player Stats -->
+    <div class="player-stats">
+        <div class="stat-item">
+            <span class="stat-icon">🏆</span>
+            <span class="stat-label">Level {{ user_data.level }}</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-icon">⭐</span>
+            <span class="stat-label">{{ user_data.xp }} XP</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-icon">✅</span>
+            <span class="stat-label">{{ user_data.quests_completed }} Completed</span>
+        </div>
+    </div>
+
+    <!-- Quest Categories -->
+    <div class="quest-categories">
+        <button class="category-btn active" data-category="all">All Quests</button>
+        <button class="category-btn" data-category="beginner">Beginner</button>
+        <button class="category-btn" data-category="intermediate">Intermediate</button>
+        <button class="category-btn" data-category="advanced">Advanced</button>
+    </div>
+
+    <!-- Quests Grid -->
+    <div class="quests-grid">
+        <!-- Beginner Quests -->
+        <div class="quest-card" data-category="beginner">
+            <div class="quest-header">
+                <div class="quest-icon">🌱</div>
+                <div class="quest-difficulty beginner">Beginner</div>
+            </div>
+            <div class="quest-content">
+                <h3 class="quest-title">First Plant Diagnosis</h3>
+                <p class="quest-description">Upload your first plant photo and get a diagnosis from our AI system.</p>
+                <div class="quest-rewards">
+                    <span class="reward-item">+50 XP</span>
+                    <span class="reward-item">🏅 Plant Detective Badge</span>
+                </div>
+                <div class="quest-participants">
+                    <span class="participants-icon">👥</span>
+                    <span class="participants-count">1,234 completed</span>
+                </div>
+            </div>
+            <button class="quest-btn" data-quest="first-diagnosis">Start Quest</button>
+        </div>
+
+        <div class="quest-card" data-category="beginner">
+            <div class="quest-header">
+                <div class="quest-icon">🌞</div>
+                <div class="quest-difficulty beginner">Beginner</div>
+            </div>
+            <div class="quest-content">
+                <h3 class="quest-title">Sunlight Experiment</h3>
+                <p class="quest-description">Use the simulation lab to find the optimal sunlight level for a tropical plant.</p>
+                <div class="quest-rewards">
+                    <span class="reward-item">+75 XP</span>
+                    <span class="reward-item">☀️ Sun Master Badge</span>
+                </div>
+                <div class="quest-participants">
+                    <span class="participants-icon">👥</span>
+                    <span class="participants-count">892 completed</span>
+                </div>
+            </div>
+            <button class="quest-btn" data-quest="sunlight-experiment">Start Quest</button>
+        </div>
+
+        <!-- Intermediate Quests -->
+        <div class="quest-card" data-category="intermediate">
+            <div class="quest-header">
+                <div class="quest-icon">🌹</div>
+                <div class="quest-difficulty intermediate">Intermediate</div>
+            </div>
+            <div class="quest-content">
+                <h3 class="quest-title">Heal the Blight</h3>
+                <p class="quest-description">Diagnose and treat a rose bush suffering from fungal blight using our treatment recommendations.</p>
+                <div class="quest-rewards">
+                    <span class="reward-item">+100 XP</span>
+                    <span class="reward-item">🌹 Rose Healer Badge</span>
+                </div>
+                <div class="quest-participants">
+                    <span class="participants-icon">👥</span>
+                    <span class="participants-count">567 completed</span>
+                </div>
+            </div>
+            <button class="quest-btn" data-quest="heal-blight">Start Quest</button>
+        </div>
+
+        <div class="quest-card" data-category="intermediate">
+            <div class="quest-header">
+                <div class="quest-icon">🌻</div>
+                <div class="quest-difficulty intermediate">Intermediate</div>
+            </div>
+            <div class="quest-content">
+                <h3 class="quest-title">Perfect Sunflower</h3>
+                <p class="quest-description">Grow the healthiest sunflower by optimizing all environmental conditions in the simulation.</p>
+                <div class="quest-rewards">
+                    <span class="reward-item">+125 XP</span>
+                    <span class="reward-item">🌻 Sunflower Champion Badge</span>
+                </div>
+                <div class="quest-participants">
+                    <span class="participants-icon">👥</span>
+                    <span class="participants-count">423 completed</span>
+                </div>
+            </div>
+            <button class="quest-btn" data-quest="perfect-sunflower">Start Quest</button>
+        </div>
+
+        <!-- Advanced Quests -->
+        <div class="quest-card" data-category="advanced">
+            <div class="quest-header">
+                <div class="quest-icon">🥕</div>
+                <div class="quest-difficulty advanced">Advanced</div>
+            </div>
+            <div class="quest-content">
+                <h3 class="quest-title">Frost Recovery</h3>
+                <p class="quest-description">Revive a frost-damaged vegetable garden by adjusting multiple environmental variables.</p>
+                <div class="quest-rewards">
+                    <span class="reward-item">+200 XP</span>
+                    <span class="reward-item">❄️ Frost Master Badge</span>
+                </div>
+                <div class="quest-participants">
+                    <span class="participants-icon">👥</span>
+                    <span class="participants-count">156 completed</span>
+                </div>
+            </div>
+            <button class="quest-btn" data-quest="frost-recovery">Start Quest</button>
+        </div>
+
+        <div class="quest-card" data-category="advanced">
+            <div class="quest-header">
+                <div class="quest-icon">🌿</div>
+                <div class="quest-difficulty advanced">Advanced</div>
+            </div>
+            <div class="quest-content">
+                <h3 class="quest-title">Master Gardener</h3>
+                <p class="quest-description">Complete 10 journal entries documenting different plant experiments with scientific method.</p>
+                <div class="quest-rewards">
+                    <span class="reward-item">+300 XP</span>
+                    <span class="reward-item">🏆 Master Gardener Title</span>
+                </div>
+                <div class="quest-participants">
+                    <span class="participants-icon">👥</span>
+                    <span class="participants-count">89 completed</span>
+                </div>
+            </div>
+            <button class="quest-btn" data-quest="master-gardener">Start Quest</button>
+        </div>
+    </div>
+
+    <!-- Quest Modal -->
+    <div id="quest-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Quest Started!</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p id="modal-description">Your quest has begun. Follow the instructions to complete it!</p>
+                <div class="modal-actions">
+                    <button id="go-to-task" class="btn btn-primary">Go to Task</button>
+                    <button class="btn btn-secondary modal-close">Later</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/quests.js') }}"></script>
+{% endblock %}

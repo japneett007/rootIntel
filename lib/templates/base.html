@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}RootIntel - AI Plant Care{% endblock %}</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#16a34a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="RootIntel">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='icon-192x192.png') }}">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🌱</span>
+                <span class="brand-text">RootIntel</span>
+            </div>
+            
+            <div class="nav-menu" id="nav-menu">
+                <a href="{{ url_for('home') }}" class="nav-link {% if request.endpoint == 'home' %}active{% endif %}">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Home</span>
+                </a>
+                <a href="{{ url_for('diagnosis') }}" class="nav-link {% if request.endpoint == 'diagnosis' %}active{% endif %}">
+                    <span class="nav-icon">🔍</span>
+                    <span class="nav-text">Diagnosis</span>
+                </a>
+                <a href="{{ url_for('simulation') }}" class="nav-link {% if request.endpoint == 'simulation' %}active{% endif %}">
+                    <span class="nav-icon">🌞</span>
+                    <span class="nav-text">Simulation</span>
+                </a>
+                <a href="{{ url_for('quests') }}" class="nav-link {% if request.endpoint == 'quests' %}active{% endif %}">
+                    <span class="nav-icon">🎮</span>
+                    <span class="nav-text">Quests</span>
+                </a>
+                <a href="{{ url_for('journal') }}" class="nav-link {% if request.endpoint == 'journal' %}active{% endif %}">
+                    <span class="nav-icon">📚</span>
+                    <span class="nav-text">Journal</span>
+                </a>
+            </div>
+            
+            <button class="nav-toggle" id="nav-toggle">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- PWA Install Prompt -->
+    <div id="pwa-install-prompt" class="pwa-prompt hidden">
+        <div class="pwa-content">
+            <div class="pwa-icon">📱</div>
+            <div class="pwa-text">
+                <h3>Install RootIntel</h3>
+                <p>Get the full app experience on your device!</p>
+            </div>
+            <div class="pwa-actions">
+                <button id="pwa-install-btn" class="btn btn-primary btn-small">Install</button>
+                <button id="pwa-dismiss-btn" class="btn btn-secondary btn-small">Later</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Offline Indicator -->
+    <div id="offline-indicator" class="offline-indicator hidden">
+        <span class="offline-icon">📡</span>
+        <span class="offline-text">You're offline</span>
+    </div>
+
+    <!-- Base Scripts -->
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    
+    {% block scripts %}{% endblock %}
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/static/sw.js')
+                    .then(function(registration) {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(function(registrationError) {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "name": "RootIntel - AI Plant Care",
+  "short_name": "RootIntel",
+  "description": "Your AI-powered plant care companion with Ghibli-inspired design",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f0fdf4",
+  "theme_color": "#16a34a",
+  "orientation": "portrait-primary",
+  "categories": ["education", "lifestyle", "utilities"],
+  "lang": "en",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/static/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/static/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Plant Diagnosis",
+      "short_name": "Diagnose",
+      "description": "Diagnose plant health issues",
+      "url": "/diagnosis",
+      "icons": [
+        {
+          "src": "/static/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Plant Simulation",
+      "short_name": "Simulate",
+      "description": "Run plant growth simulations",
+      "url": "/simulation",
+      "icons": [
+        {
+          "src": "/static/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Plant Journal",
+      "short_name": "Journal",
+      "description": "Document plant experiments",
+      "url": "/journal",
+      "icons": [
+        {
+          "src": "/static/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/static/screenshot-wide.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "/static/screenshot-narrow.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ]
+}
